@@ -1,0 +1,33 @@
+apiVersion: flinkoperator.k8s.io/v1alpha1
+kind: FlinkCluster
+metadata:
+  name: flinkcluster-beam-wordcount
+spec:
+  image:
+    name: gcr.io/google.com/hadoop-cloud-dev/flink:1.8.2-scala_2.11-gcs
+  jobManager:
+    ports:
+      ui: 8081
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "200m"
+  taskManager:
+    replicas: 2
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "200m"
+  job:
+    jarFile: gs://dagang-test/beam/jobs/word-count-beam-flink1.8.jar
+    className: org.apache.beam.examples.WordCount
+    args:
+      [
+        "--runner=FlinkRunner",
+        "--inputFile=gs://apache-beam-samples/shakespeare/kinglear.txt",
+        "--output=gs://dagang-test/beam/output/wordcount/",
+      ]
+    parallelism: 2
+    savepointsDir: gs://dagang-test/flink/savepoints
+  flinkProperties:
+    taskmanager.numberOfTaskSlots: "1"
