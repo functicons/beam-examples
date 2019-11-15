@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: beam-wordcount-py
+spec:
+  template:
+    metadata:
+      labels:
+        app: beam-wordcount-py
+    spec:
+      containers:
+        - name: beam-wordcount-py
+          image: gcr.io/google.com/hadoop-cloud-dev/apachebeam_python3.7_sdk:2.18.0.dev
+          imagePullPolicy: Always
+          command: ["python3"]
+          args:
+            - "-m"
+            - "apache_beam.examples.wordcount"
+            - "--runner=FlinkRunner"
+            - "--flink_version=1.8"
+            - "--flink_master=beam-flink-cluster-jobmanager:8081"
+            - "--job_endpoint=beam-job-server:8099"
+            - "--artifact_endpoint=beam-job-server:8098"
+            - "--environment_type=EXTERNAL"
+            - "--environment_config=localhost:50000"
+            - "--input"
+            - "/etc/ucf.conf"
+            - "--output"
+            - "/tmp/output"
+      restartPolicy: Never
