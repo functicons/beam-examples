@@ -16,9 +16,7 @@ spec:
           args:
             - "-m"
             - "apache_beam.examples.wordcount"
-            - "--runner=FlinkRunner"
-            - "--flink_version=1.8"
-            - "--flink_master=beam-flink-cluster-jobmanager:8081"
+            - "--runner=PortableRunner"
             - "--job_endpoint=beam-job-server:8099"
             - "--artifact_endpoint=beam-job-server:8098"
             - "--environment_type=EXTERNAL"
