@@ -24,10 +24,10 @@ metadata:
 spec:
   ports:
     - name: job
-      port: 8098
-      targetPort: 8098
-    - name: artifact
       port: 8099
       targetPort: 8099
+    - name: artifact
+      port: 8098
+      targetPort: 8098
   selector:
     app: beam-job-server
