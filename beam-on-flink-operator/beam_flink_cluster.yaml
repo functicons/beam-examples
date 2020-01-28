@@ -18,7 +18,7 @@ spec:
         memory: "2Gi"
     sidecars:
       - name: beam-worker-pool
-        image: gcr.io/google.com/hadoop-cloud-dev/apachebeam_python3.7_sdk:2.18.0.dev
+        image: apachebeam/python3.7_sdk:2.18.0
         args: ["--worker_pool"]
   flinkProperties:
     taskmanager.numberOfTaskSlots: "1"

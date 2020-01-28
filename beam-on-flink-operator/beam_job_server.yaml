@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: beam-job-server
-          image: gcr.io/google.com/hadoop-cloud-dev/flink-job-server:1.8-dev
+          image: apachebeam/flink1.8_job_server:2.18.0
           imagePullPolicy: Always
           args:
             - "--flink-master=beam-flink-cluster-jobmanager:8081"

@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: beam-wordcount-py
-          image: gcr.io/google.com/hadoop-cloud-dev/apachebeam_python3.7_sdk:2.18.0.dev
+          image: apachebeam/python3.7_sdk:2.18.0
           imagePullPolicy: Always
           command: ["python3"]
           args:
